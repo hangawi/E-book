@@ -1,0 +1,334 @@
+@import url('@/styles/font.css');
+@import url('@/styles/video.css');
+
+html {
+    overflow-y: hidden;
+}
+div#content-app {
+    background: transparent url(@/assets/img/common/bgFrame.png) no-repeat 0 0;
+    background-size: cover;
+    overflow-y: hidden;
+}
+
+.w-1-em {
+    width: 1em !important;
+}
+
+.w-1-5-em {
+    width: 1.5em !important;
+}
+
+.w-2-5-em {
+    width: 2.5em !important;
+}
+
+.w-3-em {
+    width: 3em !important;
+}
+
+.mr-1-em {
+    margin-right: 1em !important;
+}
+
+.fm-jetbrains {
+    font-family: "JetBrains Mono", monospace;
+}
+
+.fs-1_25 {
+    font-size: 1.25em;
+}
+
+/* animate */
+.animate__delay-0_2s {
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+}
+.animate__delay-0_4s {
+    -webkit-animation-delay: 0.4s;
+    animation-delay: 0.4s;
+}
+.animate__delay-0_6s {
+    -webkit-animation-delay: 0.6s;
+    animation-delay: 0.6s;
+}
+.animate__delay-0_8s {
+    -webkit-animation-delay: 0.8s;
+    animation-delay: 0.8s;
+}
+.animate__delay-1_0s {
+    -webkit-animation-delay: 1.0s;
+    animation-delay: 1.0s;
+}
+.animate__delay-1_2s {
+    -webkit-animation-delay: 1.2s;
+    animation-delay: 1.2s;
+}
+.animate__delay-1_4s {
+    -webkit-animation-delay: 1.4s;
+    animation-delay: 1.4s;
+}
+.animate__delay-1_6s {
+    -webkit-animation-delay: 1.6s;
+    animation-delay: 1.6s;
+}
+.animate__delay-1_8s {
+    -webkit-animation-delay: 1.8s;
+    animation-delay: 1.8s;
+}
+.animate__delay-2_0s {
+    -webkit-animation-delay: 2.0s;
+    animation-delay: 2.0s;
+}
+.animate__delay-2_2s {
+    -webkit-animation-delay: 2.2s;
+    animation-delay: 2.2s;
+}
+.animate__delay-2_4s {
+    -webkit-animation-delay: 2.4s;
+    animation-delay: 2.4s;
+}
+.animate__delay-2_6s {
+    -webkit-animation-delay: 2.6s;
+    animation-delay: 2.6s;
+}
+.animate__delay-2_8s {
+    -webkit-animation-delay: 2.8s;
+    animation-delay: 2.8s;
+}
+.animate__delay-3_0s {
+    -webkit-animation-delay: 3.0s;
+    animation-delay: 3.0s;
+}
+.animate__delay-3_2s {
+    -webkit-animation-delay: 3.2s;
+    animation-delay: 3.2s;
+}
+.animate__delay-3_4s {
+    -webkit-animation-delay: 3.4s;
+    animation-delay: 3.4s;
+}
+.animate__delay-3_6s {
+    -webkit-animation-delay: 3.6s;
+    animation-delay: 3.6s;
+}
+.animate__delay-3_8s {
+    -webkit-animation-delay: 3.8s;
+    animation-delay: 3.8s;
+}
+.animate__delay-4_0s {
+    -webkit-animation-delay: 4.0s;
+    animation-delay: 4.0s;
+}
+.animate__delay-4_2s {
+    -webkit-animation-delay: 4.2s;
+    animation-delay: 4.2s;
+}
+.animate__delay-4_4s {
+    -webkit-animation-delay: 4.4s;
+    animation-delay: 4.4s;
+}
+.animate__delay-4_6s {
+    -webkit-animation-delay: 4.6s;
+    animation-delay: 4.6s;
+}
+.animate__delay-4_8s {
+    -webkit-animation-delay: 4.8s;
+    animation-delay: 4.8s;
+}
+.animate__delay-5_0s {
+    -webkit-animation-delay: 5.0s;
+    animation-delay: 5.0s;
+}
+.animate__delay-5_2s {
+    -webkit-animation-delay: 5.2s;
+    animation-delay: 5.2s;
+}
+.animate__delay-5_4s {
+    -webkit-animation-delay: 5.4s;
+    animation-delay: 5.4s;
+}
+.animate__delay-5_6s {
+    -webkit-animation-delay: 5.6s;
+    animation-delay: 5.6s;
+}
+.animate__delay-5_8s {
+    -webkit-animation-delay: 5.8s;
+    animation-delay: 5.8s;
+}
+.animate__delay-custom_0 {
+    -webkit-animation-delay: 1.0s;
+    animation-delay: 1.0s;
+}
+.animate__delay-custom_1 {
+    -webkit-animation-delay: 1.2s;
+    animation-delay: 1.2s;
+}
+.animate__delay-custom_2 {
+    -webkit-animation-delay: 1.4s;
+    animation-delay: 1.4s;
+}
+.animate__delay-custom_3 {
+    -webkit-animation-delay: 1.6s;
+    animation-delay: 1.6s;
+}
+.animate__delay-custom_4 {
+    -webkit-animation-delay: 1.8s;
+    animation-delay: 1.8s;
+}
+.animate__delay-custom_5 {
+    -webkit-animation-delay: 2.0s;
+    animation-delay: 2.0s;
+}
+.animate__delay-custom_6 {
+    -webkit-animation-delay: 2.2s;
+    animation-delay: 2.2s;
+}
+.animate__delay-custom_7 {
+    -webkit-animation-delay: 2.4s;
+    animation-delay: 2.4s;
+}
+.animate__delay-custom_8 {
+    -webkit-animation-delay: 2.6s;
+    animation-delay: 2.6s;
+}
+.animate__delay-custom_9 {
+    -webkit-animation-delay: 2.8s;
+    animation-delay: 2.8s;
+}
+.animate__delay-custom_10 {
+    -webkit-animation-delay: 3.0s;
+    animation-delay: 3.0s;
+}
+
+/* 앨럿 오버레이 */
+.alert-overlay .v-overlay__scrim {
+    opacity: 0.75;
+}
+
+/* 퀴즈 발문 */
+span.positive {
+    font-weight: 700;
+    color: #6699ff;
+    border-bottom: 3px solid;
+}
+
+span.negative {
+    font-weight: 700;
+    color: #ff6699;
+    border-bottom: 3px solid;
+}
+
+/* 정리하기 */
+.context ul li p.level-1 {
+    font-size: 22px;
+    display: inline-block;
+    margin-left: 40px;
+}
+
+.context ul li p:before {
+    /*content: url(@/assets/img/summary/bullet.png);*/
+    position: relative;
+    /*vertical-align: -7px;*/
+    margin-left: -34px;
+    margin-right: 10px;
+    top: 3px;
+}
+
+.context ul li p.level-2 {
+    font-size: 20px;
+    display: inline-block;
+    margin-left: 65px;
+}
+
+.context ul li p.level-2::before {
+    content: '-';
+    vertical-align: 0;
+    margin-left: -25px;
+    margin-right: 10px;
+}
+
+.mdi-arrow-left::before {
+    font-size: 30px;
+}
+
+.mdi-arrow-right::before {
+    font-size: 30px;
+}
+
+.mdi-text-long::before {
+    font-size: 30px;
+}
+
+.event-none {
+    pointer-events: none;
+}
+
+.hidden {
+    display: none;
+}
+
+div.summary-intro-container.only-print {
+    visibility: hidden;
+}
+
+@media print {
+    video {
+        visibility: hidden;
+    }
+    .v-main {
+        margin-top: -140px;
+    }
+    #course-title {
+        /*display: block;*/
+        color: #000;
+        font-size: 50px !important;
+        font-weight: 700;
+        text-indent: 0 !important;
+        width: 100% !important;
+        height: 1em !important;
+        text-align: center !important;
+        margin-top: -20px !important;
+        position: fixed !important;
+        font-family: "GmarketSansMedium", serif !important;
+    }
+    #chapter-title {
+        /*top: 70px !important;*/
+        margin-top: 60px !important;
+        margin-left: -15px !important;
+        width: 100%;
+        margin-bottom: 120px !important;
+    }
+    #chapter-title > p.step-number, #chapter-title > p.step-title {
+        color: #000 !important;
+        font-size: 40px !important;
+        font-weight: 700;
+    }
+    #chapter-title > p.step-title {
+        border-bottom: 4px solid #000;
+    }
+    .vjs-control-bar {
+        visibility: hidden;
+    }
+    #refInteractive {
+        overflow: visible !important;
+        margin-top: 70px;
+    }
+    div.summary-intro-container.only-print {
+        display: block !important;
+        visibility: visible !important;
+    }
+    div.summary-intro-container.only-print .summary-area {
+        max-height: 2000px !important;
+        height: auto;
+        margin-top: 20px;
+        margin-left: 80px;
+    }
+    /*.video-js > *:not(.vjs-tech):not(.vjs-poster) {*/
+    /*    visibility: visible;*/
+    /*}*/
+
+}
+
+.v-slide-group--vertical .v-tab__slider {
+    width: 0;
+}
