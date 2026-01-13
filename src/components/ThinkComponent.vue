@@ -106,7 +106,7 @@ onMounted(() => {
   text-indent: -9999em;
   width: 273px;
   height: 53px;
-  top: 512px;
+  top: 422px; // 적어질수록 위로 올라감
   left: 0;
   transition: background 300ms ease-in-out;
   &:hover {
@@ -126,8 +126,8 @@ onMounted(() => {
   word-break: keep-all;
   color: #332e8e;
   position: absolute;
-  top: 100px;
-  left: 90px;
+  top: 130px; //적어질수록 위로 올라감
+  left: 130px; //적어질수록 왼쪽으로 이동
   max-width: 800px;
   p {
     position: absolute;
@@ -173,10 +173,10 @@ onMounted(() => {
   position: absolute;
   .answerContent {
     position: absolute;
-    top: 100px;
+    top: 160px; //적어질수록 위로 올라감
     left: 144px;
     max-width: 844px;
-    height: 320px;
+    height: 180px;
     line-height: 1.2em;
     overflow-y: auto;
     word-break: keep-all;

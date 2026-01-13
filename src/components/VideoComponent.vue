@@ -857,19 +857,19 @@ onBeforeUnmount(() => {
 .area-chapter {
   position: absolute;
   top: calc(50% - 291px);
-  left: calc(50% - 560px);
+  left: calc(50% - 660px); // 챕터이름 왼쪽으로 조정 숫자가 클수록 왼쪽
   z-index: 9999;
   p {
-    font-family: 'S-CoreDream-5Medium', sans-serif;
-    font-size: 25px;
+    font-family: 'bold', sans-serif;
+    font-size: 17px; // 챕터이름 크기
     font-weight: 600;
     letter-spacing: -1px;
     margin-left: 124px;
     margin-top: -10px;
     line-height: 1.2em;
     word-break: keep-all;
-    color: #fff;
-    text-shadow: 2px 2px 2px #302495;
+    color: #000000; // 챕터이름 그림자 색상
+    //text-shadow: 2px 2px 2px #302495;
   }
 }
 .video-js.vjs-has-started .vjs-tech {

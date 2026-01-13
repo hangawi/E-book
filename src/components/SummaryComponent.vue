@@ -76,12 +76,12 @@ onMounted(() => {
 // 학습정리
 .summary-area {
   max-width: 900px;
-  max-height: 330px;  // 스크롤 영역 높이 제한
+  max-height: 180px;  // 스크롤 영역 높이 제한
   width: 900px;
   height: auto;
   position: relative;
   margin-left: 124px;
-  margin-top: 148px;
+  margin-top: 300px;
   font-family: 'S-CoreDream-5Medium', sans-serif;
   font-size: 30px;
   letter-spacing: -1px;

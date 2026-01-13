@@ -358,7 +358,7 @@ onMounted(() => {
 
     <v-row class="ma-0 area-question">
       <v-col cols="1" class="d-flex align-end ml-12 mr-12">
-        <img :src="questionLists[quizSeq].qNum" :alt="`question_${quizSeq}`" class="animate__animated animate__flipInY animate__delay-4_0s questionNumber" style="width: 135px; margin-top: -7px; left: 8px;">
+        <img :src="questionLists[quizSeq].qNum" :alt="`question_${quizSeq}`" class="animate__animated animate__flipInY animate__delay-4_0s questionNumber" style="width: 100px; margin-top: 50px; left: 60px;">
         <img
           v-if="quizCompleted && feedbackAlert === 'correct'"
           :src="imgMarkCorrect"
@@ -531,7 +531,7 @@ onMounted(() => {
   text-indent: -9999em;
   width: 212px;
   height: 58px;
-  top: 405px;
+  top: 345px;
   left: 0;
   transition: background 300ms ease-in-out;
   &:hover {
@@ -568,10 +568,12 @@ onMounted(() => {
 
 // 프로그레스 영역
 .area-progress {
+    // 숫자를 크게 할수록 더 아래로 내려감
   p.title {
     font-family: 'S-CoreDream-3Light', sans-serif;
     font-size: 20px;
-    color: #fff;
+    color: #10ee65;
+    margin-top: 45px; // 높이
     font-weight: 400;
     margin-left: 210px;
   }
@@ -579,7 +581,7 @@ onMounted(() => {
     float: left;
     font-family: 'S-CoreDream-3Light', sans-serif;
     font-size: 22px;
-    color: #fff;
+    color: #10ee65;
     font-weight: 600;
     padding-top: 4px;
     margin-top: -6px;
@@ -715,7 +717,7 @@ ul#exam-list {
 }
 
 .area-explain {
-  background: transparent url(@/assets/img/quiz/bgQuizExplain.png) no-repeat 0 0;
+  background: transparent url(@/assets/img/quiz/bgQuizExplain.png) no-repeat 10px 0;
   background-size: contain;
   width: 1120px;
   height: 147px;
@@ -794,12 +796,12 @@ ul#exam-list {
 }
 
 // mark
-.mark-ox {
+.mark-ox { 
   position: absolute;
-  width: 116px;
-  height: 116px;
-  left: 16px;
-  top: 140px;
+  width: 80px;   // 문제번호 이미지 크기에 맞춤
+  height: 80px;
+  left: 70px;     // 문제번호 left 값에 맞춤
+  top: 195px;     // 문제번호 margin-top(50px) + 기존위치 고려
 }
 
 // 결과화면
