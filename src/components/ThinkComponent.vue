@@ -114,15 +114,15 @@ onMounted(() => {
 
 .questionHead {
   font-family: 'Paperlogy-8ExtraBold', serif;
-  font-size: 32px; //생각해보기 제목 폰트 사이즈
+  font-size: 26px; //생각해보기 제목 폰트 사이즈
   font-weight: 400;
   letter-spacing: -1px;
-  margin-top: 2dvh;
-  margin-left: 50px;
+  margin-top: 1dvh;
+  margin-left: 2px;
   margin-bottom: -40px;
   line-height: 1.2em;
   word-break: keep-all;
-  color: #ffffff;
+  color: #0e7300;
   position: absolute;
   top: 130px; //적어질수록 위로 올라감
   left: 130px; //적어질수록 왼쪽으로 이동
@@ -174,12 +174,12 @@ onMounted(() => {
     top: 160px; //적어질수록 위로 올라감
     left: 143px;
     max-width: 869px;
-    height: 180px;
+    height: 190px;
     line-height: 1.2em;
     overflow-y: auto;
     word-break: keep-all;
     font-family: 'Paperlogy-4Regular', sans-serif;
-    font-size: 27px; //답변 글씨 크기
+    font-size: 24px; //답변 글씨 크기
     font-weight: 400;
     color: #333;
     &::-webkit-scrollbar {

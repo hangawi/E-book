@@ -11,7 +11,7 @@ const chapters = fs.readdirSync(DIST_DIR)
   .filter(dir => /^\d+$/.test(dir))
   .sort((a, b) => Number(a) - Number(b))
 
-const TOTAL_PAGES = 11
+const TOTAL_PAGES = 12
 
 // ------------------------
 // 1️⃣ HTML 후처리
