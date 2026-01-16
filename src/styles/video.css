@@ -43,8 +43,7 @@
 .video-js .vjs-control-bar {
     background-color: rgba(43, 51, 63, 0.8);
     /*background-color: transparent;*/
-    position: fixed;
-    /*bottom: calc(50% - 630px / 2);*/
+    position: absolute;
     bottom: 0;
     width: 1120px;
     height: 34px;

@@ -133,6 +133,5 @@ onMounted(() => {
   width: 1120px;
   height: 630px;
   overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.75);
 }
 </style>

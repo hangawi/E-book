@@ -856,19 +856,26 @@ onBeforeUnmount(() => {
 }
 .area-chapter {
   position: absolute;
-  top: calc(50% - 291px);
-  left: calc(50% - 660px); // 챕터이름 왼쪽으로 조정 숫자가 클수록 왼쪽
-  z-index: 9999;
+  top: calc(50% - 314px);
+  left: calc(50% - 429px); // 챕터이름 왼쪽으로 조정 숫자가 클수록 왼쪽
+  z-index: 1;
+  background: transparent url(@/assets/img/top/shape.png) no-repeat center center;
+  background-size: contain;
+  width: 290px; // shape.png 배경 너비
+  height: 80px; // shape.png 배경 높이
+  display: flex;
+  align-items: center;
+  justify-content: center;
   p {
-    font-family: 'bold', sans-serif;
-    font-size: 17px; // 챕터이름 크기
-    font-weight: 600;
+    font-family: 'Paperlogy-5Medium', sans-serif;
+    font-size: 18px; // 챕터이름 크기
+    font-weight: 200;
     letter-spacing: -1px;
-    margin-left: 124px;
-    margin-top: -10px;
-    line-height: 1.2em;
+    margin-left: 0;
+    margin-top: 0;
     word-break: keep-all;
-    color: #000000; // 챕터이름 그림자 색상
+    color: #000000; // 챕터이름 색상
+    text-align: center;
     //text-shadow: 2px 2px 2px #302495;
   }
 }
@@ -883,7 +890,7 @@ onBeforeUnmount(() => {
   max-width: 1120px;
   width: 1120px;
   position: fixed;
-  bottom: 48px;
+  bottom: 0;
   padding: 20px 20px;
   background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(100px);
@@ -892,7 +899,7 @@ onBeforeUnmount(() => {
     margin: 20px;
     max-height: 9em;
     min-height: 1.5em;
-    font-family: 'S-CoreDream-5Medium', serif;
+    font-family: 'Paperlogy-5Medium', serif;
     font-size: 20px;
     line-height: 1.5em;
     color: #fff;
@@ -958,7 +965,7 @@ onBeforeUnmount(() => {
     li {
       list-style: none;
       padding: 6px 18px;
-      font-family: "S-CoreDream-5Medium", serif;
+      font-family: "Paperlogy-5Medium", serif;
       font-size: 18px;
       font-weight: 700;
       transition: color 300ms ease-in-out;
@@ -982,7 +989,7 @@ onBeforeUnmount(() => {
   position: fixed;
   //top: 20px;
   //left: 20px;
-  font-family: "S-CoreDream-5Medium", sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   color: #fff;
   padding: 0 5px;
   background-color: rgba(0, 0, 0, 0.5);
@@ -1096,7 +1103,7 @@ onBeforeUnmount(() => {
       width: 180px;
       li {
         list-style: none;
-        font-family: 'S-CoreDream-5Medium', serif;
+        font-family: 'Paperlogy-5Medium', serif;
         font-weight: 400;
         font-size: 22px;
         color: #135db7;

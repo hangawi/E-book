@@ -47,9 +47,6 @@ onMounted(() => {
   const elPlayControl = document.querySelector('.vjs-play-control') as HTMLElement
   elProgress.classList.add('event-none')
   elPlayControl.classList.add('event-none')
-  setTimeout(() => {
-    handleStart()
-  }, 12000)
 })
 </script>
 
@@ -104,9 +101,9 @@ onMounted(() => {
   background: transparent url(@/assets/img/think/btnThink.png) no-repeat 0 0;
   background-size: contain;
   text-indent: -9999em;
-  width: 273px;
-  height: 53px;
-  top: 422px; // 적어질수록 위로 올라감
+  width: 373px;
+  height: 453px;
+  top: 342px; // 적어질수록 위로 올라감
   left: 0;
   transition: background 300ms ease-in-out;
   &:hover {
@@ -116,15 +113,16 @@ onMounted(() => {
 }
 
 .questionHead {
-  font-family: 'S-CoreDream-5Medium', serif;
-  font-size: 28px; //생각해보기 제목 폰트 사이즈
+  font-family: 'Paperlogy-8ExtraBold', serif;
+  font-size: 32px; //생각해보기 제목 폰트 사이즈
   font-weight: 400;
   letter-spacing: -1px;
-  margin-left: 40px;
+  margin-top: 2dvh;
+  margin-left: 50px;
   margin-bottom: -40px;
   line-height: 1.2em;
   word-break: keep-all;
-  color: #332e8e;
+  color: #0ea18a;
   position: absolute;
   top: 130px; //적어질수록 위로 올라감
   left: 130px; //적어질수록 왼쪽으로 이동
@@ -167,34 +165,47 @@ onMounted(() => {
 .area-answer {
   //background: transparent url(@/assets/img/think/bgAnswer.png) no-repeat 0 0;
   //background-size: contain;
-  width: 1120px;
+  width: 1320px;
   height: 500px;
   bottom: 0;
   position: absolute;
   .answerContent {
     position: absolute;
     top: 160px; //적어질수록 위로 올라감
-    left: 144px;
-    max-width: 844px;
+    left: 143px;
+    max-width: 869px;
     height: 180px;
     line-height: 1.2em;
     overflow-y: auto;
     word-break: keep-all;
-    font-family: 'S-CoreDream-5Medium', sans-serif;
+    font-family: 'Paperlogy-4Regular', sans-serif;
     font-size: 25px; //답변 글씨 크기
     font-weight: 400;
     color: #333;
     &::-webkit-scrollbar {
       width: 10px;
-      background-color: rgba(200, 200, 200, 0.75);
+      background-color: #ffffff;
     }
     &::-webkit-scrollbar-thumb {
-      background-color: #6699ff;
+      background-color: #808080;
       border-radius: 100px;
     }
     &::-webkit-scrollbar-track {
-      background-color: rgba(200, 200, 200, 0.75);
+      background-color: #ffffff;
       border-radius: 0;
+    }
+    &::-webkit-scrollbar-button {
+      display: block;
+      height: 16px;
+      background-color: #ffffff;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    &::-webkit-scrollbar-button:vertical:start:decrement {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23808080' d='M6 4l-4 4h8z'/%3E%3C/svg%3E");
+    }
+    &::-webkit-scrollbar-button:vertical:end:increment {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23808080' d='M6 8l4-4H2z'/%3E%3C/svg%3E");
     }
   }
 }

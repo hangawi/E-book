@@ -330,49 +330,50 @@ onMounted(() => {
     </v-row>
 
     <v-row class="ma-0 mt-1 area-progress">
-      <v-col>
-        <p class="title">
-          시간 내에 문제를 풀어보세요.
-        </p>
-        <p class="timer">
-          {{ timeLeft }}
-        </p>
-
-        <v-sheet
-          class="d-flex align-center px-0 py-0 px-0 mt-2"
-          max-width="800"
-          color="transparent"
-        >
-          <v-progress-linear
-            :location="null"
-            bg-color="#bababa"
-            bg-opacity="100"
-            color="#ffe878"
-            height="12"
-            :max="TOTAL_TIME"
-            :model-value="progress"
-          />
-        </v-sheet>
+      <v-col class="pa-0">
+        <div class="question-number-wrapper">
+          <img :src="questionLists[quizSeq].qNum" :alt="`question_${quizSeq}`" class="animate__animated animate__flipInY animate__delay-4_0s questionNumber">
+          <img
+            v-if="quizCompleted && feedbackAlert === 'correct'"
+            :src="imgMarkCorrect"
+            alt="correct"
+            class="animate__animated animate__bounceIn animate__delay-2s mark-ox"
+          >
+          <img
+            v-if="quizCompleted && feedbackAlert === 'wrong'"
+            :src="imgMarkWrong"
+            alt="wrong"
+            class="animate__animated animate__bounceIn animate__delay-2s mark-ox"
+          >
+        </div>
+        <div class="timer-section">
+          <div class="timer-left">
+            <p class="title">
+              시간 내에 문제를 풀어보세요.
+            </p>
+            <v-sheet
+              class="d-flex align-center px-0 py-0"
+              color="transparent"
+            >
+              <v-progress-linear
+                bg-color="#e9e9e9"
+                bg-opacity="100"
+                color="#30e1c6"
+                height="12"
+                :max="TOTAL_TIME"
+                :model-value="progress"
+              />
+            </v-sheet>
+          </div>
+          <p class="timer" :class="`timer-${timeLeft}`">
+            {{ timeLeft }}
+          </p>
+        </div>
       </v-col>
     </v-row>
 
     <v-row class="ma-0 area-question">
-      <v-col cols="1" class="d-flex align-end ml-12 mr-12">
-        <img :src="questionLists[quizSeq].qNum" :alt="`question_${quizSeq}`" class="animate__animated animate__flipInY animate__delay-4_0s questionNumber" style="width: 100px; margin-top: 50px; left: 60px;">
-        <img
-          v-if="quizCompleted && feedbackAlert === 'correct'"
-          :src="imgMarkCorrect"
-          alt="correct"
-          class="animate__animated animate__bounceIn animate__delay-2s mark-ox"
-        >
-        <img
-          v-if="quizCompleted && feedbackAlert === 'wrong'"
-          :src="imgMarkWrong"
-          alt="wrong"
-          class="animate__animated animate__bounceIn animate__delay-2s mark-ox"
-        >
-      </v-col>
-      <v-col class="d-flex align-end mr-4">
+      <v-col class="pa-0">
         <div class="questionHead animate__animated animate__flipInX animate__delay-4_0s">
           <p v-html="questionLists[quizSeq].question" />
         </div>
@@ -497,8 +498,8 @@ onMounted(() => {
         </v-row>
         <v-row class="result-count">
           <v-col>
-            <p class="d-inline-block total-count" v-html="3" />
-            <p class="d-inline-block animate__animated animate__flipInX animate__delay-1s correct-count" v-html="correctCount" />
+            <p class="d-inline-block total-count">{{ 3 }}<span class="count-text">문항</span></p>
+            <p class="d-inline-block animate__animated animate__flipInX animate__delay-1s correct-count">{{ correctCount }}<span class="count-text">문항</span></p>
           </v-col>
         </v-row>
         <v-row class="result-retry">
@@ -553,7 +554,7 @@ onMounted(() => {
 // 차시명 영역
 .area-chapter {
   p {
-    font-family: 'S-CoreDream-5Medium', sans-serif;
+    font-family: 'Paperlogy-5Medium', sans-serif;
     font-size: 25px;
     font-weight: 600;
     letter-spacing: -1px;
@@ -566,58 +567,129 @@ onMounted(() => {
   }
 }
 
-// 프로그레스 영역
+// 프로그레스 영역 (타이머바 + 문제번호 한 줄)
 .area-progress {
-    // 숫자를 크게 할수록 더 아래로 내려감
-  p.title {
-    font-family: 'S-CoreDream-3Light', sans-serif;
-    font-size: 20px;
-    color: #10ee65;
-    margin-top: 45px; // 높이
-    font-weight: 400;
-    margin-left: 210px;
+  position: absolute;
+  left: 65px;
+  top: 105px;
+  width: calc(100% - 240px);
+  display: flex;
+  align-items: flex-start;
+
+  .v-col {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    width: 100%;
   }
+
+  .timer-section {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .timer-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .question-number-wrapper {
+    position: relative;
+    width: 80px;
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  p.title {
+    font-family: 'Paperlogy-5Medium', sans-serif;
+    font-size: 23px;
+    color: #564f1c;
+    font-weight: 500;
+    margin: 0;
+  }
+
   p.timer {
-    float: left;
-    font-family: 'S-CoreDream-3Light', sans-serif;
+    font-family: 'Paperlogy-7Bold', sans-serif;
     font-size: 22px;
-    color: #10ee65;
+    color: #1e9e8a;
     font-weight: 600;
-    padding-top: 4px;
-    margin-top: -6px;
-    margin-left: 166px;
-    margin-right: 8px;
     border-radius: 50%;
-    letter-spacing: -1px;
-    width: 38px;
-    height: 38px;
-    border: 2px dashed #ffe878;
+    letter-spacing: 0;
+    width: 50px;
+    height: 50px;
+    border: 6px solid #1e9e8a;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0;
+    margin-left: auto;
+    margin-right: -80px;
+    padding: 0;
+    padding-top: 1px;
+    padding-right: 0.5px;
+
+    &.timer-1 {
+      padding-right: 0.5px;
+      padding-left: 0;
+    }
+
+    &.timer-2 {
+      padding-left: 1px;
+      padding-right: 0;
+    }
+
+    &.timer-3 {
+      padding-left: 0.5px;
+      padding-right: 0;
+    }
+
+    &.timer-4 {
+      padding-right: 0.5px;
+      padding-left: 0;
+    }
+  }
+
+  // 진행바 radius
+  :deep(.v-progress-linear) {
+    border-radius: 10px;
+    overflow: hidden;
+
+    .v-progress-linear__determinate {
+      border-radius: 10px;
+    }
   }
 }
 
 // 발문 영역
 .area-question {
-  height: 100px;
+  position: absolute;
+  left: -20px;
+  top: 180px;
+  width: 100%;
 }
 
 .questionNumber {
-  position: absolute;
-  left: 18px;
-  top: 146px;
+  width: 50px !important;
+  height: auto;
+  margin-top: 5px;
+  margin-left: 18px;
 }
 
 .questionHead {
-  font-family: 'S-CoreDream-5Medium', serif;
+  font-family: 'Paperlogy-7Bold', serif;
   font-size: 32px;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -1px;
-  margin-left: -28px;
+  margin-left: 120px;
+  margin-top: 0;
   line-height: 1.2em;
   word-break: keep-all;
-  color: #000;
+  color: #1e9e8a;
   span.positive {
     color: #ff6699;
     border-bottom: 2px solid;
@@ -631,14 +703,15 @@ onMounted(() => {
 
 // 지문 영역
 .area-sentence {
-  top: 100px;
+  position: absolute;
+  top: 320px;
+  left: 120px;
   width: 880px;
-  margin-left: 258px;
   padding: 12px 18px;
-  font-family: 'S-CoreDream-5Medium', serif;
+  font-family: 'Paperlogy-5Medium', serif;
   font-size: 26px;
   line-height: 1.5em;
-  color: #333;
+  color: #1e9e8a;
   background-color: transparent;
   backdrop-filter: blur(10px);
   border-radius: 0;
@@ -649,17 +722,19 @@ onMounted(() => {
 // 보기 영역
 ul#exam-list {
   position: absolute;
-  left: 173px;
+  left: 100px;
+  top: 230px;
 }
+
 .exam-lists {
   list-style: none;
   width: fit-content;
   height: 50px;
   line-height: 44px;
   div {
-    font-family: 'S-CoreDream-4Regular', serif;
+    font-family: 'Paperlogy-4Regular', serif;
     font-size: 28px;
-    font-weight: 600;
+    font-weight: 200;
     color: #333;
     pointer-events: none;
     &.exam-answer {
@@ -670,15 +745,19 @@ ul#exam-list {
       margin-top: -12px;
     }
     &.exam-number {
-      background-color: #000;
+      background-color: #fff;
       width: 33px;
       height: 33px;
-      line-height: 35px;
+      line-height: 1;
       font-size: 24px;
-      padding: 2px;
-      color: #fff;
+      padding: 0;
+      padding-top: 2px;
+      padding-right: 0.5px;
+      color: #000;
+      border: 2px solid #000;
+      border-radius: 50%;
       display: flex;
-      align-content: center;
+      align-items: center;
       justify-content: center;
       text-align: center;
       transition: background 200ms ease-in-out;
@@ -686,17 +765,41 @@ ul#exam-list {
     &.exam-text {
       font-size: 26px;
       text-indent: 14px;
+      font-family: 'Paperlogy-4Regular', serif;
     }
   }
+}
+
+// 숫자별 개별 padding 조정
+.exam-lists:nth-child(1) .exam-number {
+  padding-top: 3px;
+  padding-right: 0.5px;
+}
+
+.exam-lists:nth-child(2) .exam-number {
+  padding-top: 2px;
+  padding-left: 1px;
+}
+
+.exam-lists:nth-child(3) .exam-number {
+  padding-top: 3px;
+  padding-left: 0.5px;
+}
+
+.exam-lists:nth-child(4) .exam-number {
+  padding-top: 2px;
+  padding-right: 0.5px;
 }
 
 .exam-lists.selected {
   cursor: none;
   user-select: none;
   pointer-events: none;
+
   div {
     &.exam-number {
       background-color: #999;
+      border-color: #999;
     }
     &.exam-text {
       color: #999;
@@ -708,39 +811,43 @@ ul#exam-list {
   cursor: pointer;
   div {
     &.exam-number {
-      background-color: #6c49ca;
+      background-color: #1e9e8a;
+      color: #fff;
+      border: 2px solid #1e9e8a;
     }
     &.exam-text {
-      color: #6c49ca;
+      color: #1e9e8a;
     }
   }
 }
 
 .area-explain {
-  background: transparent url(@/assets/img/quiz/bgQuizExplain.png) no-repeat 10px 0;
-  background-size: contain;
-  width: 1120px;
-  height: 147px;
+  background: transparent url(@/assets/img/quiz/bgQuizExplain.png) no-repeat center;
+  background-size: 100% auto;
+  width: 770px;
+  height: auto;
+  min-height: 147px;
+  left: 85px;
   position: relative;
-  bottom: 0;
+  bottom: 70px;
   .correctNumber {
-    font-family: 'S-CoreDream-5Medium', serif;
-    font-size: 68px;
+    font-family: 'Paperlogy-7Bold', serif;
+    font-size: 45px;
     font-weight: 700;
-    color: #ffe878;
-    margin-left: 66px;
-    margin-top: 40px;
+    color: #1e9e8a;
+    margin-left: 15px;
+    margin-top: 50px;
   }
   .text {
-    font-family: 'S-CoreDream-5Medium', serif;
+    font-family: 'Paperlogy-4Regular', serif;
     position: absolute;
-    font-size: 26px;
+    font-size: 22px;
     letter-spacing: -1px;
     line-height: 1.3em;
     color: #000;
     bottom: 50px;
-    margin-top: 18px;
-    margin-left: 170px;
+    margin-top: 28px;
+    margin-left: 85px;
     word-break: keep-all;
     max-height: 70px;
     overflow-y: auto;
@@ -764,9 +871,9 @@ ul#exam-list {
   button {
     position: absolute;
     width: 175px;
-    height: 44px;
-    right: 0;
-    top: -24px;
+    height: 74px;
+    left: 785px;
+    top: 24px;
     text-indent: -9999em;
     transition: background 300ms ease-in-out;
     &.btn-next {
@@ -796,12 +903,12 @@ ul#exam-list {
 }
 
 // mark
-.mark-ox { 
+.mark-ox {
   position: absolute;
-  width: 80px;   // 문제번호 이미지 크기에 맞춤
-  height: 80px;
-  left: 70px;     // 문제번호 left 값에 맞춤
-  top: 195px;     // 문제번호 margin-top(50px) + 기존위치 고려
+  width: 50px;
+  height: 50px;
+  left: 20px;
+  top: -4px;
 }
 
 // 결과화면
@@ -813,36 +920,41 @@ ul#exam-list {
 }
 
 .result-mark {
-  margin-top: 320px;
+  margin-top: 330px;
   .result-ox {
-    width: 112px;
-    height: 112px;
+    width: 97px;
+    height: 97px;
+    position: relative;
   }
   .result-ox.q-1 {
-    margin-left: 295px;
+    left: 290px;
   }
   .result-ox.q-2 {
-    margin-left: 74px;
+    left: 131px;
   }
   .result-ox.q-3 {
-    margin-left: -70px;
+    left: -27px;
   }
 }
 
 .result-count {
   margin-top: -244px;
-  font-family: 'S-CoreDream-5Medium', serif;
-  font-size: 34px;
+  font-family: 'Paperlogy-5Medium', serif;
+  font-size: 27px;
   font-weight: 900;
   .total-count {
-    margin-left: 378px;
+    margin-left: 409px;
     color: #182093;
   }
   .correct-count {
     position: absolute;
     color: #ff3e6b;
-    font-size: 34px;
-    margin-left: 94px;
+    font-size: 27px;
+    margin-left: 28px;
+  }
+  .count-text {
+    font-size: 27px;
+    margin-left: 0;
   }
 }
 
@@ -850,9 +962,10 @@ ul#exam-list {
   background: transparent url(@/assets/img/quiz/btnRetry.png) no-repeat 0 0;
   background-size: contain;
   text-indent: -9999em;
-  width: 124px;
-  height: 40px;
+  width: 350px;
+  height: 50px;
   margin-top: 12px;
+  margin-left: 130px;
   transition: background 300ms ease-in-out;
   &:hover {
     background: transparent url(@/assets/img/quiz/btnRetryOn.png) no-repeat 0 0;
@@ -876,22 +989,23 @@ ul#exam-list {
 }
 
 .countdown-title {
-  font-family: 'S-CoreDream-5Medium', sans-serif;
-  font-size: 58px;
+  font-family: 'Paperlogy-5Medium', sans-serif;
+  font-size: 68px;
   font-weight: 600;
   letter-spacing: -4px;
-  color: #fff;
-  margin-top: 10px;
+  color: #1e9e8a;
+  margin-top: -10px;
+  margin-right : 3px;
   margin-bottom: 44px;
 }
 
 .countdown-number {
-  font-family: 'S-CoreDream-7ExtraBold', sans-serif;
+  font-family: 'Paperlogy-7ExtraBold', sans-serif;
   font-size: 140px;
   font-weight: 700;
-  color: #fff;
-  -webkit-text-stroke: 2px #332e8e;
-  text-shadow: 2px 2px 0 #332e8e;
+  color: #1e9e8a;
+  -webkit-text-stroke: 2px #38ab9b;
+  text-shadow: 2px 2px 0 #38ab9b;
   animation: pulse 1s ease-in-out;
 }
 

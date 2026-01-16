@@ -191,7 +191,7 @@ onMounted(() => {
   text-indent: -9999em;
   width: 144px;
   height: 40px;
-  top: 134px;
+  top: 169px;
   transition: background 300ms ease-in-out;
   &:hover {
     background: transparent url(@/assets/img/pre/btnSubmitOn.png) no-repeat 0 0;
@@ -201,29 +201,33 @@ onMounted(() => {
 
 .checkLists {
   position: relative;
-  left: 926px;
-  top: 132px;
+  left: 905px; //위치
+  top: 170px;
   .checkCols {
     position: relative;
-    width: 30px;
-    height: 30px;
-    margin-bottom: 9px;
-    max-width: 63px;
+    width: 20px; 
+    height: 20px;
+    margin-bottom:14px;
+    max-width: 53px; //버튼 간 간격
     button {
       //background: transparent url(@/assets/img/pre/btnCheck.png) no-repeat 0 0;
       display: inline-block;
-      width: 30px;
-      height: 30px;
+      width: 20px;
+      height: 20px;
       &.check_o {
         background: transparent url(@/assets/img/pre/btnCheckO.png) no-repeat 0 0;
+        background-size: contain;
         &:hover, &.checked {
           background: transparent url(@/assets/img/pre/btnCheckOOn.png) no-repeat 0 0;
+          background-size: contain;
         }
       }
       &.check_x {
         background: transparent url(@/assets/img/pre/btnCheckX.png) no-repeat 0 0;
+        background-size: contain;
         &:hover, &.checked {
           background: transparent url(@/assets/img/pre/btnCheckXOn.png) no-repeat 0 0;
+          background-size: contain;
         }
       }
       //&:hover, &.checked {
@@ -234,7 +238,7 @@ onMounted(() => {
 }
 
 .questionHead {
-  font-family: 'S-CoreDream-5Medium', serif;
+  font-family: 'Paperlogy-5Medium', serif;
   font-size: 30px;
   font-weight: 700;
   letter-spacing: -1px;
@@ -286,25 +290,25 @@ onMounted(() => {
   bottom: 0;
   position: absolute;
   p.level {
-    font-family: 'S-CoreDream-5Medium', serif;
+    font-family: 'Paperlogy-8ExtraBold', serif;
     font-weight: 400;
-    font-size: 50px;
-    color: #6c49ca;
+    font-size: 42px;
+    color: #048f7a;
     position: absolute;
-    top: 125px;
-    left: 655px;
+    top: 163px;
+    left: 643px;
     letter-spacing: -2px;
   }
   .download-cols {
     position: absolute;
-    top: 444px;
-    left: 172px;
+    top: 392px;
+    left: 205px;
     button.btnDown {
       background: transparent url(@/assets/img/pre/btnDownload.png) no-repeat 0 0;
       background-size: contain;
       width: 184px;
-      height: 30px;
-      margin-right: 90px;
+      height: 42px;
+      margin-right: 60px;
       text-indent: -9999em;
       &:hover {
         background: transparent url(@/assets/img/pre/btnDownloadOn.png) no-repeat 0 0;
@@ -319,8 +323,8 @@ onMounted(() => {
     height: 44px;
     text-indent: -9999em;
     position: absolute;
-    left: 975px;
-    top: 105px;
+    left: 930px;
+    top: 132px;
     transition: transform .3s ease-in-out;
     &:hover {
       background: transparent url(@/assets/img/pre/btnCloseOn.png) no-repeat 0 0;
