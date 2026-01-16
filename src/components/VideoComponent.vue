@@ -207,7 +207,7 @@ const videoOptions = {
       'nextButton',
     ],
     volumePanel: {
-      inline: false,
+      inline: true, // 가로 볼륨바로 변경
     },
   },
 }

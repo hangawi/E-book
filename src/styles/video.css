@@ -46,8 +46,11 @@
     position: absolute;
     bottom: 0;
     width: 1120px;
+    max-width: 1120px;
     height: 34px;
     margin: 0 auto;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .vjs-button > .vjs-icon-placeholder:before {
@@ -82,7 +85,7 @@
 }
 
 .video-js .vjs-progress-holder {
-    height: 0.6em;
+    height: 0.3em; /* 볼륨바와 동일한 높이 */
 }
 
 /* 프로그레스바 색상 변경 */
@@ -119,9 +122,13 @@
     font-family: "GmarketSansMedium", monospace;
 }
 
-/* 프로그레스바 드래그 포인트 숨김 */
+/* 프로그레스바 드래그 포인트 표시 (볼륨바와 동일) */
 .video-js .vjs-play-progress:before {
-    content: '';
+    font-size: 0.9em;
+    position: absolute;
+    right: -0.5em;
+    top: -0.00em;
+    z-index: 1;
 }
 
 .video-js .vjs-slider {
@@ -140,12 +147,17 @@
 
 /* 프로그레스바 너비 줄이기 */
 .video-js .vjs-progress-control {
-    margin: 0 40px;
+    margin: 0 10px;
+    max-width: 450px; /* 진행바 최대 너비 (원하는 길이로 조정) */
+    width: 450px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 1;
 }
 
 /* 프로그레스바 높이 조절 및 배경 투명화 */
 .video-js .vjs-progress-control .vjs-mouse-display {
-    height: 0.6em;
+    height: 0.3em; /* 볼륨바와 동일한 높이 */
     background-color: transparent;
 }
 
@@ -166,9 +178,51 @@
     width: 5em;
 }
 
-/* 볼륨 버티컬 */
-.vjs-volume-bar.vjs-slider-vertical {
-    height: 5.5em;
+/* 볼륨 가로 슬라이더 */
+.video-js .vjs-volume-panel {
+    width: 8em;
+    min-width: 8em;
+    max-width: 8em;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.video-js .vjs-volume-panel .vjs-volume-control {
+    opacity: 1 !important;
+    width: 5em !important;
+    height: auto !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.video-js .vjs-volume-bar {
+    margin: 0 0.45em 0 0.45em;
+}
+
+.video-js .vjs-volume-bar.vjs-slider-horizontal {
+    width: 5em;
+    height: 0.3em;
+}
+
+.video-js .vjs-volume-panel .vjs-mute-control {
+    line-height: 34px;
+}
+
+.video-js .vjs-volume-panel.vjs-volume-panel-horizontal:hover,
+.video-js .vjs-volume-panel.vjs-volume-panel-horizontal:active,
+.video-js .vjs-volume-panel.vjs-volume-panel-horizontal.vjs-slider-active,
+.video-js .vjs-volume-panel.vjs-volume-panel-horizontal.vjs-hover {
+    width: 8em;
+    min-width: 8em;
+    max-width: 8em;
+}
+
+.video-js .vjs-volume-panel.vjs-volume-panel-horizontal.vjs-hover .vjs-volume-control.vjs-volume-horizontal,
+.video-js .vjs-volume-panel.vjs-volume-panel-horizontal:active .vjs-volume-control.vjs-volume-horizontal,
+.video-js .vjs-volume-panel.vjs-volume-panel-horizontal.vjs-slider-active .vjs-volume-control.vjs-volume-horizontal {
+    width: 5em;
+    height: auto;
 }
 
 .is-audio {
