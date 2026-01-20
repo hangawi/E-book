@@ -12,6 +12,7 @@ const pagesDir = path.resolve(__dirname, 'src/pages')
 const chapters = fs.readdirSync(pagesDir)
   .filter(dir => fs.statSync(path.join(pagesDir, dir)).isDirectory())
 
+
 export default defineConfig({
   base: './',
   plugins: [

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(for file in *.vue)",
+      "Bash(do sed -i \"s|/data/02.json|/data/03.json|g\" \"$file\")",
+      "Bash(done)",
+      "Bash(git checkout:*)"
+    ]
+  }
+}

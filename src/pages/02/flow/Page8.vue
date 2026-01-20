@@ -36,9 +36,13 @@ axios.get('/data/02.json').then((result) => {
   courseInfo.value = json.courseInfo
   pageInfo.value = json.pageInfo
   video.value = json.video_8 as string
-  thinkContent.value = {
-    question: json.think.question,
-    answer:   json.think.answer,
+
+  // think가 있을 때만 설정
+  if (json.think && json.think.question) {
+    thinkContent.value = {
+      question: json.think.question,
+      answer:   json.think.answer,
+    }
   }
 
   scriptText.value = json.scripts[6] as string
@@ -88,7 +92,7 @@ onMounted(() => {
   />
   <div id="refInteractive" ref="refThink" class="animate__animated animate__fadeIn animate__delay-3s">
     <ThinkComponent
-      v-if="isReady"
+      v-if="isReady && thinkContent"
       :think-content="thinkContent"
       @handle-next="handleNext"
     />

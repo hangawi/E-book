@@ -1,0 +1,96 @@
+{
+  "courseInfo": {
+    "courseName": "미래를 밝히는 기술, 스마트에너지 ICT",
+    "chapterNumber": 7,
+    "chapterTitle": "태양광 발전: 원리와 기술발전",
+    "stepNumber": 7,
+    "stepTitle": "",
+    "subMenu1": 1,
+    "subMenu2": 6,
+    "subMenu3": 9
+  },
+  "video_1": "../mp4/intro_01.mp4",
+  "video_3": "../mp4/goal_01.mp4",
+  "video_4": "../mp4/keyword_01.mp4",
+  "video_5": "../mp4/7_01.mp4",
+  "video_6": "../mp4/7_02.mp4",
+  "video_7": "../mp4/7_03.mp4",
+  "video_9": "../mp4/quiz.mp4",
+  "video_10": "../mp4/summary.mp4",
+  "video_11": "../mp4/outro_01.mp4",
+  "pageInfo": [
+    { "category": "1", "showChapter":  false, "seq": "1", "title": "인트로" },
+    { "category": "1", "showChapter":  true,  "seq": "2", "title": "학습목표" },
+    { "category": "1", "showChapter":  true,  "seq": "3", "title": "주요 키워드" },
+    { "category": "2", "showChapter":  false, "seq": "4", "title": "본문1" },
+    { "category": "2", "showChapter":  false, "seq": "5", "title": "본문2" },
+    { "category": "2", "showChapter":  false, "seq": "6", "title": "본문3" },
+    { "category": "3", "showChapter":  true,  "seq": "7", "title": "퀴즈" },
+    { "category": "3", "showChapter":  true,  "seq": "8", "title": "정리하기" },
+    { "category": "3", "showChapter":  false, "seq": "9", "title": "아웃트로" }
+  ],
+  "think": null,
+  "quiz": [
+    {
+      "question": "태양광발전의 장점으로 옳지 않은 것은 ?",
+      "sentence": null,
+      "tall": false,
+      "examLists": [
+        "무공해, 무소음, 무한자원",
+        "설치가 용이",
+        "높은 에너지 밀도",
+        "유지관리 비용 저렴"
+      ],
+      "correct": 3,
+      "explain": "태양광발전은 단위면적당 에너지빌도 또는 효율성이 낮은 것이 단점입니다."
+    },
+    {
+      "question": "태양광발전에 필수적인 인버터에 대한 설명으로 잘못된 것은 ?",
+      "sentence": null,
+      "tall": false,
+      "examLists": [
+        "DC를 AC로 변환",
+        "시스템 오동작 및 설비보호는 별도시스템 적용",
+        "최대전력 추적(MPPT)기능",
+        "시스템 모니터링 기능"
+      ],
+      "correct": 2,
+      "explain": "인버터는 대부분 전체시스템을 모니텅링 하여 오동작 및 과열, 단략문제 발생시 자동으로 처리하는 보호시스템을 내장하고 있습니다."
+    },
+    {
+      "question": "3세대 태양광 기술의 핵심이며, 기존 태양전지의 한계를 뛰어넘을 '게임 체인저'로 불리는 것은 ?",
+      "sentence": null,
+      "tall": false,
+      "examLists": [
+        "실리콘",
+        "박막",
+        "페로브스카이트",
+        "비정질 실리콘"
+      ],
+      "correct": 3,
+      "explain": "페로브스카이트(Perovskite)는 기존 실리콘 태양전지의 한계를 뛰어넘을 '게임 체인저'로 불립니다."
+    }
+  ],
+  "summary": [
+    {
+      "title": null,
+      "context": [
+        "인버터의 주요기능은 전력변환(AC  → DC), 최대전력점 추적, 시스템 모니터링,<br>계통보호 기능으로 태양광 발전시스템의 핵심장비 입니다.",
+        "태양전지는 빛에너지를 전기로 바꾸는 반도체 장치로, p-n접합 구조가 핵심이며<br>반사방지막과 전극 등으로 구성됩니다.",
+        "태양광 발전 계통연계형(Grid-Connected System)는 생산한 전기를 한국전력 등<br>외부 전력망에 연결하여 판매하거나 사용하는 방식으로 에너지저장장치(ESS)가<br>필수적이지 않아 초기 투자비용을 절감되어 대규모 발전소, 주택, 상업 시설 등에서 널리<br>사용되는 방식입니다."
+      ]
+    }
+  ],
+  "scripts": [
+    "미래를 밝히는 기술, 스마트 에너지 ICT<br>7차시 태양광 발전: 원리와 기술발전",
+    "본 학습에서는 자막을 제공하지 않습니다.",
+    "이번 시간에는 광센서 기술과 헬스케어 가전 그리고 스마트워치에대해 알아보겠습니다.<br>학습을 마치고 광센서의 동작원리를 이해하고 헬스케어의 개념과 관련된 가전제품을 이해할 수 있습니다. 또한 헬스케어 꽃인 스마트워치의 주요 기능을 파악할 수 있습니다.",
+    "주요 키워드를 살펴 볼까요?<br>먼저 IoT는 세상의 모든 사물을 인터넷으로 연결하여 사람의 직접적인 개입 없이 사물들끼리 또는 사물과 사람이 데이터를 주고받고 스스로 판단하게 하는 기술입니다.",
+    "다음으로 '인터넷이 되는 가전'을 우리는 보통 스마트 가전(Smart Appliances)이라고 부르며, 일반가전에 \"인터넷이 연결됨으로써 사용자에게 어떤 이득을 주는가\"가 스마트가전의 핵심임.",
+    "다음으로 '인터넷이 되는 가전'을 우리는 보통 스마트 가전(Smart Appliances)이라고 부르며, 일반가전에 \"인터넷이 연결됨으로써 사용자에게 어떤 이득을 주는가\"가 스마트가전의 핵심임.",
+    "본문3 스크립트",
+    "오늘 학습한 내용을 바탕으로 문제를 풀어봅시다.<br>총 3문제가 제시되며, 2번의 기회가 주어집니다.<br>준비가 되었으면 START 버튼을 클릭하세요.",
+    "지금까지 학습한 내용을 정리해 봅시다.",
+    "이것으로 7차시 학습을 마치겠습니다. 모두 수고하셨습니다."
+  ]
+}

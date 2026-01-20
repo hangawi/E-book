@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>미래를 밝히는 기술, 스마트에너지 ICT - 차시 목록</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      color: white;
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    .chapters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .chapter-card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      text-decoration: none;
+      color: #333;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .chapter-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    .chapter-number {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .chapter-card:hover .chapter-number {
+      background: white;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .chapter-label {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>미래를 밝히는 기술, 스마트에너지 ICT</h1>
+    <div class="chapters-grid" id="chaptersContainer"></div>
+  </div>
+
+  <script>
+    const contentsData = [
+      {chapter: "1", path: "./01/01.html"},
+      {chapter: "2", path: "./02/01.html"},
+      {chapter: "3", path: "./03/01.html"},
+      {chapter: "4", path: "./04/01.html"},
+      {chapter: "5", path: "./05/01.html"},
+      {chapter: "6", path: "./06/01.html"},
+      {chapter: "7", path: "./07/01.html"},
+      {chapter: "8", path: "./08/01.html"},
+      {chapter: "9", path: "./09/01.html"},
+      {chapter: "10", path: "./10/01.html"},
+      {chapter: "11", path: "./11/01.html"},
+      {chapter: "12", path: "./12/01.html"},
+      {chapter: "13", path: "./13/01.html"},
+      {chapter: "14", path: "./14/01.html"},
+      {chapter: "15", path: "./15/01.html"},
+      {chapter: "16", path: "./16/01.html"},
+      {chapter: "17", path: "./17/01.html"},
+      {chapter: "18", path: "./18/01.html"}
+    ];
+
+    const container = document.getElementById('chaptersContainer');
+
+    contentsData.forEach(item => {
+      const card = document.createElement('a');
+      card.href = item.path;
+      card.className = 'chapter-card';
+
+      const number = document.createElement('div');
+      number.className = 'chapter-number';
+      number.textContent = item.chapter;
+
+      const label = document.createElement('div');
+      label.className = 'chapter-label';
+      label.textContent = '차시';
+
+      card.appendChild(number);
+      card.appendChild(label);
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>

@@ -125,7 +125,7 @@ onMounted(() => {
   color: #0e7300;
   position: absolute;
   top: 130px; //적어질수록 위로 올라감
-  left: 130px; //적어질수록 왼쪽으로 이동
+  left: 120px; //적어질수록 왼쪽으로 이동
   max-width: 800px;
   p {
     position: absolute;
@@ -165,15 +165,15 @@ onMounted(() => {
 .area-answer {
   //background: transparent url(@/assets/img/think/bgAnswer.png) no-repeat 0 0;
   //background-size: contain;
-  width: 1320px;
+  width: 1420px;
   height: 500px;
   bottom: 0;
   position: absolute;
   .answerContent {
     position: absolute;
     top: 160px; //적어질수록 위로 올라감
-    left: 143px;
-    max-width: 869px;
+    left: 133px;
+    max-width: 889px;
     height: 190px;
     line-height: 1.2em;
     overflow-y: auto;
@@ -182,6 +182,7 @@ onMounted(() => {
     font-size: 24px; //답변 글씨 크기
     font-weight: 400;
     color: #333;
+    padding-right: 20px; // 스크롤바와 글자 간격
     &::-webkit-scrollbar {
       width: 10px;
       background-color: #ffffff;

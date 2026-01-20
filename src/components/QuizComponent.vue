@@ -896,8 +896,7 @@ ul#exam-list {
 
 // 피드백 앨럿창
 .imgAlert {
-  width: 800px;              // 너비 (숫자를 줄이면 작아짐)
-  height: auto;
+  width: 500px;              // 너비 (숫자를 줄이면 작아짐)  height: auto;
   touch-action: none;
   pointer-events: none;
   -webkit-user-drag: none;
