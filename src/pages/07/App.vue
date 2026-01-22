@@ -3,6 +3,7 @@ import { defineComponent, ref } from 'vue'
 
 import Page1 from './flow/Page1.vue'
 // import Page2 from './flow/Page2.vue'  // 사전테스트 제거
+import Page2 from './flow/Page2.vue'
 import Page3 from './flow/Page3.vue'
 import Page4 from './flow/Page4.vue'
 import Page5 from './flow/Page5.vue'
@@ -11,7 +12,6 @@ import Page7 from './flow/Page7.vue'
 import Page8 from './flow/Page8.vue'
 import Page9 from './flow/Page9.vue'
 import Page10 from './flow/Page10.vue'
-import Page11 from './flow/Page11.vue'
 
 const subjectName = '웹개발 첫걸음: HTML과 CSS로 정적웹페이지 만들기'
 const chapterName = '7차시'
@@ -72,6 +72,7 @@ export default defineComponent({
   components: {
     Page1,
     // Page2,  // 사전테스트 제거
+    Page2,
     Page3,
     Page4,
     Page5,
@@ -80,7 +81,6 @@ export default defineComponent({
     Page8,
     Page9,
     Page10,
-    Page11,
   },
   setup() {
   },
@@ -112,15 +112,15 @@ export default defineComponent({
     <v-main id="content-main" class="d-flex flex-column align-self-center justify-center">
       <Page1 v-if="currentPage === 1" :current-page="currentPage" :total-pages="totalPages" @prev-page="prevPage" @next-page="nextPage" @change-page="changePage" />
       <!-- Page2 사전테스트 제거됨 -->
-      <Page3 v-if="currentPage === 2" :current-page="currentPage" :total-pages="totalPages" @prev-page="prevPage" @next-page="nextPage" @change-page="changePage" />
-      <Page4 v-if="currentPage === 3" :current-page="currentPage" :total-pages="totalPages" @prev-page="prevPage" @next-page="nextPage" @change-page="changePage" />
-      <Page5 v-if="currentPage === 4" :current-page="currentPage" :total-pages="totalPages" @prev-page="prevPage" @next-page="nextPage" @change-page="changePage" />
-      <Page6 v-if="currentPage === 5" :current-page="currentPage" :total-pages="totalPages" @prev-page="prevPage" @next-page="nextPage" @change-page="changePage" />
-      <Page7 v-if="currentPage === 6" :current-page="currentPage" :total-pages="totalPages" @prev-page="prevPage" @next-page="nextPage" @change-page="changePage" />
-      <Page8 v-if="currentPage === 7" :current-page="currentPage" :total-pages="totalPages" @prev-page="prevPage" @next-page="nextPage" @change-page="changePage" />
-      <Page9 v-if="currentPage === 8" :current-page="currentPage" :total-pages="totalPages" @prev-page="prevPage" @next-page="nextPage" @change-page="changePage" />
-      <Page10 v-if="currentPage === 9" :current-page="currentPage" :total-pages="totalPages" @prev-page="prevPage" @next-page="nextPage" @change-page="changePage" />
-      <Page11 v-if="currentPage === 10" :current-page="currentPage" :total-pages="totalPages" @prev-page="prevPage" @next-page="nextPage" @change-page="changePage" />
+      <Page2 v-if="currentPage === 2" :current-page="currentPage" :total-pages="totalPages" @prev-page="prevPage" @next-page="nextPage" @change-page="changePage" />
+      <Page3 v-if="currentPage === 3" :current-page="currentPage" :total-pages="totalPages" @prev-page="prevPage" @next-page="nextPage" @change-page="changePage" />
+      <Page4 v-if="currentPage === 4" :current-page="currentPage" :total-pages="totalPages" @prev-page="prevPage" @next-page="nextPage" @change-page="changePage" />
+      <Page5 v-if="currentPage === 5" :current-page="currentPage" :total-pages="totalPages" @prev-page="prevPage" @next-page="nextPage" @change-page="changePage" />
+      <Page6 v-if="currentPage === 6" :current-page="currentPage" :total-pages="totalPages" @prev-page="prevPage" @next-page="nextPage" @change-page="changePage" />
+      <Page7 v-if="currentPage === 7" :current-page="currentPage" :total-pages="totalPages" @prev-page="prevPage" @next-page="nextPage" @change-page="changePage" />
+      <Page8 v-if="currentPage === 8" :current-page="currentPage" :total-pages="totalPages" @prev-page="prevPage" @next-page="nextPage" @change-page="changePage" />
+      <Page9 v-if="currentPage === 9" :current-page="currentPage" :total-pages="totalPages" @prev-page="prevPage" @next-page="nextPage" @change-page="changePage" />
+      <Page10 v-if="currentPage === 10" :current-page="currentPage" :total-pages="totalPages" @prev-page="prevPage" @next-page="nextPage" @change-page="changePage" />
     </v-main>
   </v-app>
 </template>

@@ -3,7 +3,9 @@ import { onMounted, ref } from 'vue'
 import axios from 'axios'
 import VideoComponent from '@/components/VideoComponent.vue'
 
-import poster from '@/assets/img/common/poster.png'
+import ThinkComponent from '@/components/ThinkComponent.vue'
+
+// import audio from '@/assets/sound/narr/think.mp3'
 
 const props = defineProps({
   currentPage: {
@@ -23,6 +25,7 @@ let json
 const courseInfo = ref()
 const pageInfo = ref()
 const video = ref()
+const thinkContent = ref()
 const scriptText = ref()
 
 const isReady = ref(false)
@@ -32,8 +35,17 @@ axios.get('/data/03.json').then((result) => {
 
   courseInfo.value = json.courseInfo
   pageInfo.value = json.pageInfo
-  video.value = json.video_6 as string
-  scriptText.value = json.scripts[4] as string
+  video.value = json.video_8 as string
+
+  // think가 있을 때만 설정
+  if (json.think && json.think.question) {
+    thinkContent.value = {
+      question: json.think.question,
+      answer:   json.think.answer,
+    }
+  }
+
+  scriptText.value = json.scripts[5] as string
 
   setTimeout(() => {
     isReady.value = true
@@ -41,6 +53,8 @@ axios.get('/data/03.json').then((result) => {
 }).catch(() => {
   console.log('error')
 })
+
+const refThink = ref('')
 
 const handlePrev = () => {
   emit('prevPage')
@@ -53,6 +67,11 @@ const handleChangeIndex = (target: number) => {
 }
 
 onMounted(() => {
+  setTimeout(() => {
+    const elMain = document.querySelector('#refInteractive') as HTMLDivElement
+    const elVideo = document.querySelector('#videoPlayer') as HTMLVideoElement
+    elVideo.appendChild(elMain)
+  }, 100)
   parent.setCurrentPageNumber(6)
 })
 </script>
@@ -60,7 +79,6 @@ onMounted(() => {
 <template>
   <VideoComponent
     v-if="isReady"
-    :poster="poster"
     :video="video"
     :course-info="courseInfo"
     :page-info="pageInfo"
@@ -72,15 +90,23 @@ onMounted(() => {
     @handle-next="handleNext"
     @handle-change-page="handleChangeIndex"
   />
-  <div id="refInteractive" />
+  <div id="refInteractive" ref="refThink" class="animate__animated animate__fadeIn animate__delay-3s">
+    <ThinkComponent
+      v-if="isReady && thinkContent"
+      :think-content="thinkContent"
+      @handle-next="handleNext"
+    />
+  </div>
 </template>
 
 <style scoped>
+.video-js .vjs-tech {
+  display: none;
+}
 #refInteractive {
   position: absolute;
   width: 1120px;
   height: 630px;
   overflow: hidden;
-  pointer-events: none;
 }
 </style>

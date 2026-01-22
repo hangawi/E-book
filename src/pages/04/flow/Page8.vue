@@ -3,9 +3,12 @@ import { onMounted, ref } from 'vue'
 import axios from 'axios'
 import VideoComponent from '@/components/VideoComponent.vue'
 
-import ThinkComponent from '@/components/ThinkComponent.vue'
+import QuizComponent from '@/components/QuizComponent.vue'
 
-// import audio from '@/assets/sound/narr/think.mp3'
+// import audio from '@/assets/sound/narr/quiz.mp3'
+import imgQ1 from '@/assets/img/quiz/qNum_1.png'
+import imgQ2 from '@/assets/img/quiz/qNum_2.png'
+import imgQ3 from '@/assets/img/quiz/qNum_3.png'
 
 const props = defineProps({
   currentPage: {
@@ -25,7 +28,7 @@ let json
 const courseInfo = ref()
 const pageInfo = ref()
 const video = ref()
-const thinkContent = ref()
+const questionLists = ref()
 const scriptText = ref()
 
 const isReady = ref(false)
@@ -35,17 +38,38 @@ axios.get('/data/04.json').then((result) => {
 
   courseInfo.value = json.courseInfo
   pageInfo.value = json.pageInfo
-  video.value = json.video_8 as string
+  video.value = json.video_9 as string
+  questionLists.value = [
+    {
+      qNum:      imgQ1,
+      question:  json.quiz[0].question,
+      sentence:  json.quiz[0].sentence,
+      tall:      json.quiz[0].tall,
+      examLists: json.quiz[0].examLists,
+      correct:   json.quiz[0].correct,
+      explain:   json.quiz[0].explain,
+    },
+    {
+      qNum:      imgQ2,
+      question:  json.quiz[1].question,
+      sentence:  json.quiz[1].sentence,
+      tall:      json.quiz[1].tall,
+      examLists: json.quiz[1].examLists,
+      correct:   json.quiz[1].correct,
+      explain:   json.quiz[1].explain,
+    },
+    {
+      qNum:      imgQ3,
+      question:  json.quiz[2].question,
+      sentence:  json.quiz[2].sentence,
+      tall:      json.quiz[2].tall,
+      examLists: json.quiz[2].examLists,
+      correct:   json.quiz[2].correct,
+      explain:   json.quiz[2].explain,
+    },
+  ]
 
-  // think가 있을 때만 설정
-  if (json.think && json.think.question) {
-    thinkContent.value = {
-      question: json.think.question,
-      answer:   json.think.answer,
-    }
-  }
-
-  scriptText.value = json.scripts[6] as string
+  scriptText.value = json.scripts[7] as string
 
   setTimeout(() => {
     isReady.value = true
@@ -54,7 +78,7 @@ axios.get('/data/04.json').then((result) => {
   console.log('error')
 })
 
-const refThink = ref('')
+const refQuiz = ref('')
 
 const handlePrev = () => {
   emit('prevPage')
@@ -72,7 +96,7 @@ onMounted(() => {
     const elVideo = document.querySelector('#videoPlayer') as HTMLVideoElement
     elVideo.appendChild(elMain)
   }, 100)
-  parent.setCurrentPageNumber(7)
+  parent.setCurrentPageNumber(8)
 })
 </script>
 
@@ -90,10 +114,11 @@ onMounted(() => {
     @handle-next="handleNext"
     @handle-change-page="handleChangeIndex"
   />
-  <div id="refInteractive" ref="refThink" class="animate__animated animate__fadeIn animate__delay-3s">
-    <ThinkComponent
-      v-if="isReady && thinkContent"
-      :think-content="thinkContent"
+  <div id="refInteractive" ref="refQuiz" class="animate__animated animate__fadeIn animate__delay-5s">
+    <QuizComponent
+      v-if="isReady"
+      :course-info="courseInfo"
+      :question-lists="questionLists"
       @handle-next="handleNext"
     />
   </div>
@@ -110,3 +135,4 @@ onMounted(() => {
   overflow: hidden;
 }
 </style>
+
