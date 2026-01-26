@@ -498,6 +498,9 @@ onMounted(() => {
       class="countdown-overlay"
       :transition="false"
     >
+      <div class="shape-container-countdown">
+        <p>{{ chapterTitle }}</p>
+      </div>
       <div class="countdown-wrap">
         <p class="countdown-title">
           {{ questionTitle }}
@@ -1097,20 +1100,21 @@ ul#exam-list {
   left: calc(50% - 429px);
   background: transparent url(@/assets/img/top/shape.png) no-repeat center center;
   background-size: contain;
-  width: 290px;
-  height: 80px;
+  width: 317px;
+  height: 78px;
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: none;
+  z-index: 1000001;
 
   p {
     font-family: 'Paperlogy-5Medium', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 200;
     letter-spacing: -1px;
     margin-left: 7px;
-    margin-top: 0;
+    margin-top: -4px;
     word-break: keep-all;
     color: #000000;
     text-align: center;
@@ -1128,6 +1132,33 @@ ul#exam-list {
 
 .countdown-overlay :deep(.v-overlay__content) {
   z-index: 999999 !important;
+}
+
+.countdown-overlay .shape-container-countdown {
+  position: fixed;
+  top: calc(50% - 314px);
+  left: calc(50% - 429px);
+  background: transparent url(@/assets/img/top/shape.png) no-repeat center center;
+  background-size: contain;
+  width: 317px;
+  height: 79px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1000000;
+
+  p {
+    font-family: 'Paperlogy-5Medium', sans-serif;
+    font-size: 16px;
+    font-weight: 200;
+    letter-spacing: -1px;
+    margin-left: 7px;
+    margin-top: -2px;
+    word-break: keep-all;
+    color: #000000;
+    text-align: center;
+  }
 }
 
 .countdown-wrap {
