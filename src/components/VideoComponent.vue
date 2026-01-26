@@ -861,18 +861,18 @@ onBeforeUnmount(() => {
   z-index: 9997;
   background: transparent url(@/assets/img/top/shape.png) no-repeat center center;
   background-size: contain;
-  width: 290px; // shape.png 배경 너비
-  height: 80px; // shape.png 배경 높이
+  width: 317px; // shape.png 배경 너비
+  height: 78px; // shape.png 배경 높이
   display: flex;
   align-items: center;
   justify-content: center;
   p {
     font-family: 'Paperlogy-5Medium', sans-serif;
-    font-size: 14px; // 챕터이름 크기
+    font-size: 16px; // 챕터이름 크기
     font-weight: 200;
     letter-spacing: -1px;
     margin-left: 7px;
-    margin-top: 0;
+    margin-top: -2px;
     word-break: keep-all;
     color: #000000; // 챕터이름 색상
     text-align: center;
@@ -1006,7 +1006,7 @@ onBeforeUnmount(() => {
     }
     &.step-title {
       //background-color: rgba(214, 101, 121, 1.0);
-      font-size: 24px;
+      font-size: 26px;
     }
     &.current-chapter {
       margin-left: 10px;

@@ -96,11 +96,11 @@ const handleDownload = (level) => {
   let res = ''
 
   if (level === 1)
-    res = '../down/[초급]Windows System Programming.pdf'
+    res = '/down/사전진단테스트 피드백 학습자료_초급.pdf'
   else if (level === 2)
-    res = '../down/[중급]Windows System Programming.pdf'
+    res = '/down/사전진단테스트 피드백 학습자료_중급.pdf'
   else
-    res = '../down/[고급]Windows System Programming.pdf'
+    res = '/down/사전진단테스트 피드백 학습자료_고급.pdf'
 
   window.open(res, '_blank')
 }

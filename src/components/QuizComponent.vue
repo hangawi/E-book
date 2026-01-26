@@ -467,6 +467,9 @@ onMounted(() => {
       class="always-visible-overlay"
     >
       <div class="shape2-container"></div>
+      <div class="shape-container">
+        <p>{{ chapterTitle }}</p>
+      </div>
     </v-overlay>
     <v-overlay
       v-model="alert"
@@ -1088,6 +1091,32 @@ ul#exam-list {
   pointer-events: none;
 }
 
+.always-visible-overlay .shape-container {
+  position: absolute;
+  top: calc(50% - 314px);
+  left: calc(50% - 429px);
+  background: transparent url(@/assets/img/top/shape.png) no-repeat center center;
+  background-size: contain;
+  width: 290px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+
+  p {
+    font-family: 'Paperlogy-5Medium', sans-serif;
+    font-size: 14px;
+    font-weight: 200;
+    letter-spacing: -1px;
+    margin-left: 7px;
+    margin-top: 0;
+    word-break: keep-all;
+    color: #000000;
+    text-align: center;
+  }
+}
+
 .countdown-overlay {
   z-index: 999999 !important;
 }
@@ -1098,7 +1127,7 @@ ul#exam-list {
 }
 
 .countdown-overlay :deep(.v-overlay__content) {
-  z-index: 1000000 !important;
+  z-index: 999999 !important;
 }
 
 .countdown-wrap {
