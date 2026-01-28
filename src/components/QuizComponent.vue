@@ -1155,7 +1155,7 @@ li.exam-lists.exam-lists-long {
     font-size: 19px;
     font-weight: 200;
     letter-spacing: -1px;
-    margin-left: 16.5px;
+    margin-left: 11px;
     margin-top: -2px;
     word-break: keep-all;
     color: #000000;
@@ -1174,7 +1174,7 @@ li.exam-lists.exam-lists-long {
   top: calc(50% - 313.5px);
 
   p {
-    margin-left: 18px;
+    margin-left: 11px;
   }
 }
 

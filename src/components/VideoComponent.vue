@@ -871,7 +871,7 @@ onBeforeUnmount(() => {
     font-size: 19px;
     font-weight: 200;
     letter-spacing: -1px;
-    margin-left: 17px;
+    margin-left: 10px;
     margin-top: -2px;
     word-break: keep-all;
     color: #000000;
