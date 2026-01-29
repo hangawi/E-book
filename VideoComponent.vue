@@ -109,7 +109,6 @@ const elBody = document.querySelector('body') as HTMLBodyElement
 let isFullscreen
 
 const isPlayed = ref(false)
-const showNextButton = ref(false)
 
 const playbackRateLists = [0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0]
 
@@ -146,11 +145,6 @@ const itostr = (arg: number) => arg.toString().padStart(2, '0')
 const chapterTitle = computed(() =>
     `${itostr(props.courseInfo.chapterNumber)}. ${props.courseInfo.chapterTitle}`,
 )
-
-const isLastPage = computed(() => {
-  // 현재 페이지가 마지막 페이지(아웃트로)인 경우 2.png 표시
-  return props.currentPage === props.totalPages
-})
 
 // const handleDownloadAll = () => {
 //   window.open('../down/note_all.zip', '_self')
@@ -213,7 +207,7 @@ const videoOptions = {
       'nextButton',
     ],
     volumePanel: {
-      inline: true, // 가로 볼륨바로 변경
+      inline: false,
     },
   },
 }
@@ -621,27 +615,7 @@ onMounted(() => {
 
   player.value.on('ended', () => {
     // player.value.controlBar.playToggle.hide()
-    showNextButton.value = true
   })
-
-  const currentTimeDisplay = player.value.controlBar.getChild('currentTimeDisplay')
-  let lastNonZeroTime = 0
-  const originalUpdate = currentTimeDisplay.updateContent.bind(currentTimeDisplay)
-
-  currentTimeDisplay.updateContent = function() {
-    const currentTime = player.value.currentTime()
-
-    // currentTime이 0이고 lastNonZeroTime이 있으면 0초를 표시하지 않음
-    if (currentTime === 0 && lastNonZeroTime > 0) {
-      return // 0초 표시 막기
-    }
-
-    if (currentTime > 0) {
-      lastNonZeroTime = currentTime
-    }
-
-    originalUpdate()
-  }
 
   replayButtonDom.classList.add('v-btn', 'mdi', 'mdi-replay')
   replayButtonDom.style = 'font-size: 28px;'
@@ -736,42 +710,6 @@ onMounted(() => {
     changeRateText(_item)
   })
 
-  // 배속 메뉴 위치 조정
-  setTimeout(() => {
-    const rateElement = document.querySelector('.vjs-playback-rate') as HTMLElement
-    const rateMenu = document.querySelector('.vjs-playback-rate .vjs-menu') as HTMLElement
-
-    if (rateElement && rateMenu) {
-      rateElement.addEventListener('mouseenter', () => {
-        const buttonRect = rateElement.getBoundingClientRect()
-
-        rateMenu.style.setProperty('display', 'block', 'important')
-        rateMenu.style.setProperty('visibility', 'visible', 'important')
-        rateMenu.style.setProperty('opacity', '1', 'important')
-        rateMenu.style.setProperty('height', 'auto', 'important')
-        rateMenu.style.setProperty('min-height', '200px', 'important')
-        rateMenu.style.setProperty('position', 'fixed', 'important')
-        rateMenu.style.setProperty('left', `${buttonRect.left}px`, 'important')
-        rateMenu.style.setProperty('bottom', `${window.innerHeight - buttonRect.top - 12}px`, 'important')
-        rateMenu.style.setProperty('top', 'auto', 'important')
-        rateMenu.style.setProperty('z-index', '100001', 'important')
-        rateMenu.style.setProperty('margin', '0', 'important')
-        rateMenu.style.setProperty('padding', '0', 'important')
-      })
-
-      rateElement.addEventListener('mouseleave', () => {
-        rateMenu.style.setProperty('display', 'none', 'important')
-      })
-
-      const menuItemsList = rateMenu.querySelectorAll('.vjs-menu-item')
-      menuItemsList.forEach((item) => {
-        item.addEventListener('click', () => {
-          rateMenu.style.setProperty('display', 'none', 'important')
-        })
-      })
-    }
-  }, 500)
-
   document.addEventListener('fullscreenchange',       handleFullscreenEvent)
   document.addEventListener('webkitfullscreenchange', handleFullscreenEvent)
   document.addEventListener('onfullscreenchange',     handleFullscreenEvent)
@@ -790,7 +728,7 @@ onMounted(() => {
     // window.addEventListener('resize', handleResizeContent)
     window['_currentChapter'] = props.courseInfo.chapterNumber
     const elTitle = document.querySelector('title') as HTMLTitleElement
-    elTitle.text = `${props.courseInfo.courseName} : ${props.courseInfo.chapterNumber}차시. ${props.courseInfo.chapterTitle}`
+    elTitle.text = `웹개발 첫걸음: HTML과 CSS로 정적웹페이지 만들기 : ${props.courseInfo.chapterNumber}차시. ${props.courseInfo.chapterTitle}`
   }, 100)
   setTimeout(() => {
     isReady.value = true
@@ -847,15 +785,11 @@ onBeforeUnmount(() => {
   </button>
 
   <Teleport v-if="isPlayed" to="#refInteractive">
-    <v-row v-if="pageInfo[currentPage - 1].showChapter" id="fixedChapter" class="ma-0 area-chapter animate__animated animate__flipInX" :class="!isPlayed ? 'hidden' : ''" :data-chapter="courseInfo.chapterNumber">
+    <v-row v-if="pageInfo[currentPage - 1].showChapter" id="fixedChapter" class="ma-0 area-chapter animate__animated animate__flipInX" :class="!isPlayed ? 'hidden' : ''">
       <v-col>
         <p>{{ chapterTitle }}</p>
       </v-col>
     </v-row>
-
-    <div v-if="currentPage !== 1 && currentPage !== totalPages" id="course-title" class="animate__animated animate__fadeIn animate__delay-0_2s">
-      {{ courseInfo.courseName }}
-    </div>
   </Teleport>
 
   <div id="index-menu">
@@ -865,6 +799,10 @@ onBeforeUnmount(() => {
       <!--        {{ courseInfo.chapterNumber }}. -->
       <!--        {{ courseInfo.chapterTitle }} -->
       </p>
+    </div>
+    <!-- <div id="course-title" :class="(currentPage === 1) ? 'animate__animated animate__backInRight' : 'animate__animated animate__fadeIn animate__delay-0_2s'"> -->
+    <div id="course-title" class="animate__animated animate__fadeIn animate__delay-0_2s">
+      웹개발 첫걸음: HTML과 CSS로 정적웹페이지 만들기
     </div>
     <!-- <button id="index-open" class="animate__animated animate__fadeInUp animate__faster animate__delay-1s" @click="showIndex = !showIndex"> -->
     <!--   index -->
@@ -900,14 +838,6 @@ onBeforeUnmount(() => {
     </button>
   </div>
 
-  <button
-    v-if="showNextButton && currentPage <= totalPages && pageInfo[currentPage - 1].title !== '퀴즈' && pageInfo[currentPage - 1].title !== '평가하기'"
-    :class="['btn-next', 'animate__animated', 'animate__fadeIn', { 'btn-next-last': isLastPage }]"
-    @click="emit('handleNext')"
-  >
-    NEXT
-  </button>
-
   <v-container id="refScript" class="w-100 ma-0 pa-0 script-container">
     <v-row class="ma-0 area-question">
       <v-col id="script-area" :ref="refScriptArea" cols="1" class="pa-0 d-flex align-end animate__animated" :class="openScript ? 'animate__flipInX' : ''">
@@ -926,49 +856,34 @@ onBeforeUnmount(() => {
 }
 .area-chapter {
   position: absolute;
-  top: calc(50% - 313px);
-  left: calc(50% - 429px);
-  z-index: 9997;
-  background: transparent url(@/assets/img/top/shape.png) no-repeat center center;
-  background-size: contain;
-  width: 317px;
-  height: 78px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  top: calc(50% - 291px);
+  left: calc(50% - 560px);
+  z-index: 9999;
   p {
-    font-family: 'Paperlogy-5Medium', sans-serif;
-    font-size: 19px;
-    font-weight: 200;
+    font-family: 'S-CoreDream-5Medium', sans-serif;
+    font-size: 25px;
+    font-weight: 600;
     letter-spacing: -1px;
-    margin-left: 10px;
-    margin-top: -2px;
+    margin-left: 124px;
+    margin-top: -10px;
+    line-height: 1.2em;
     word-break: keep-all;
-    color: #000000;
-    text-align: center;
+    color: #fff;
+    text-shadow: 2px 2px 2px #302495;
   }
-}
-.area-chapter[data-chapter="11"],
-.area-chapter[data-chapter="12"],
-.area-chapter[data-chapter="13"],
-.area-chapter[data-chapter="19"] {
-  background: transparent url(@/assets/img/top/Shapev2.png) no-repeat center center;
-  background-size: contain;
-  width: 380px;
-  left: calc(50% - 430px);
 }
 .video-js.vjs-has-started .vjs-tech {
   pointer-events: none;
 }
 .script-container {
   max-width: 1120px;
-  z-index: 9997;
+  z-index: 9999;
 }
 #script-area {
   max-width: 1120px;
   width: 1120px;
   position: fixed;
-  bottom: 0;
+  bottom: 48px;
   padding: 20px 20px;
   background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(100px);
@@ -977,7 +892,7 @@ onBeforeUnmount(() => {
     margin: 20px;
     max-height: 9em;
     min-height: 1.5em;
-    font-family: 'Paperlogy-5Medium', serif;
+    font-family: 'S-CoreDream-5Medium', serif;
     font-size: 20px;
     line-height: 1.5em;
     color: #fff;
@@ -1009,23 +924,6 @@ onBeforeUnmount(() => {
   text-indent: -9999em;
   &:hover {
     background: transparent url(@/assets/img/common/skipBtnOver.png) no-repeat 0 0;
-  }
-}
-
-.btn-next {
-  position: absolute;
-  bottom: calc(50% - 291px);
-  right: calc(50% - 560px);
-  background: transparent url(@/assets/img/common/1.png) no-repeat center center;
-  background-size: contain;
-  width: 100px;
-  height: 120px;
-  z-index: 10000;
-  text-indent: -9999em;
-  cursor: pointer;
-  border: none;
-  &.btn-next-last {
-    background-image: url(@/assets/img/common/2.png);
   }
 }
 #bookmark {
@@ -1060,7 +958,7 @@ onBeforeUnmount(() => {
     li {
       list-style: none;
       padding: 6px 18px;
-      font-family: "Paperlogy-5Medium", serif;
+      font-family: "S-CoreDream-5Medium", serif;
       font-size: 18px;
       font-weight: 700;
       transition: color 300ms ease-in-out;
@@ -1084,7 +982,7 @@ onBeforeUnmount(() => {
   position: fixed;
   //top: 20px;
   //left: 20px;
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: "S-CoreDream-5Medium", sans-serif;
   color: #fff;
   padding: 0 5px;
   background-color: rgba(0, 0, 0, 0.5);
@@ -1101,7 +999,7 @@ onBeforeUnmount(() => {
     }
     &.step-title {
       //background-color: rgba(214, 101, 121, 1.0);
-      font-size: 26px;
+      font-size: 24px;
     }
     &.current-chapter {
       margin-left: 10px;
@@ -1111,24 +1009,22 @@ onBeforeUnmount(() => {
 }
 
 #course-title {
-  position: absolute;
-  top: calc(50% - 295px);
-  right: calc(50% - 689px);
-  background: transparent url(@/assets/img/top/contentsTitle.png) no-repeat center center;
-  width: 527px;
-  height: 39px;
-  background-size: contain !important;
+  position: fixed;
+  // TODO 과정명
+  //background: transparent url(@/assets/img/top/contentsTitle.png) no-repeat 0 0;
+  width: 300px;
+  height: 60px;
+  background-size: 300px 60px !important;
   text-indent: -9999em;
-  z-index: 9997;
 }
 
 #index-menu {
   position: absolute;
   overflow: hidden;
   width: 1120px;
-  height: 563px;
+  height: 630px;
   pointer-events: none;
-  z-index: 1;  // 미디어바 뒤로 (미디어바는 z-index: 9999)
+  z-index: 9;
   button#index-open {
     position: fixed;
     //background: transparent url(@/assets/img/index/indexBtn.png) no-repeat 0 0;
@@ -1147,8 +1043,8 @@ onBeforeUnmount(() => {
     width: 50px;
     height: 50px;
     text-indent: -9999em;
-    top: 386px;
-    right: 10px;
+    top: 446px;
+    right: 0;
     pointer-events: all;
     transition: transform .3s ease-in-out;
     &:hover {
@@ -1165,31 +1061,28 @@ onBeforeUnmount(() => {
     position: absolute;
     bottom: 0;
     li.main-index {
-      width: 132px;  // indexBg.png 크기에 맞춤
-      height: 132px;  // indexBg.png 크기에 맞춤
+      width: 150px;
+      height: 150px;
       line-height: 30px;
       list-style: none;
       display: inline-block;
-      margin-top: 19px;  // 미디어바와 간격 (26px → 35px)
+      margin-top: 22px;
       margin-right: 15px;
       cursor: pointer;
-      background-size: contain !important;  // hover 시 이미지 크기 맞춤
+      //background: transparent url(@/assets/img/index/index_empty.png) no-repeat 0 0;
       transition: background 300ms ease-in-out;
       pointer-events: all;
     }
     li#page-1.active, li#page-1:hover {
-      background: transparent url(@/assets/img/index/index_1.png) no-repeat center center;
-      background-size: contain;  // 이미지 크기 맞춤
+      background: transparent url(@/assets/img/index/index_1.png) no-repeat 0 0;
       transition: background 300ms ease-in-out;
     }
     li#page-2.active, li#page-2:hover {
-      background: transparent url(@/assets/img/index/index_2.png) no-repeat center center;
-      background-size: contain;  // 이미지 크기 맞춤
+      background: transparent url(@/assets/img/index/index_2.png) no-repeat 0 0;
       transition: background 300ms ease-in-out;
     }
     li#page-3.active, li#page-3:hover {
-      background: transparent url(@/assets/img/index/index_3.png) no-repeat center center;
-      background-size: contain;  // 이미지 크기 맞춤
+      background: transparent url(@/assets/img/index/index_3.png) no-repeat 0 0;
       transition: background 300ms ease-in-out;
     }
     li#page-4.active, li#page-4:hover {
@@ -1203,7 +1096,7 @@ onBeforeUnmount(() => {
       width: 180px;
       li {
         list-style: none;
-        font-family: 'Paperlogy-5Medium', serif;
+        font-family: 'S-CoreDream-5Medium', serif;
         font-weight: 400;
         font-size: 22px;
         color: #135db7;
@@ -1237,7 +1130,7 @@ onBeforeUnmount(() => {
 }
 
 #refHelper {
-  z-index: 9997;
+  z-index: 9999;
   position: absolute;
   width: 1120px;
   max-width: 1120px;
@@ -1397,15 +1290,5 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-}
-
-// video.js 배속 메뉴 표시
-:deep(.vjs-playback-rate) {
-  position: relative !important;
-  z-index: 100000 !important;
-}
-
-:deep(.vjs-playback-rate .vjs-menu) {
-  z-index: 100001 !important;
 }
 </style>
