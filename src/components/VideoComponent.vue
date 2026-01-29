@@ -617,6 +617,25 @@ onMounted(() => {
     // player.value.controlBar.playToggle.hide()
   })
 
+  const currentTimeDisplay = player.value.controlBar.getChild('currentTimeDisplay')
+  let lastNonZeroTime = 0
+  const originalUpdate = currentTimeDisplay.updateContent.bind(currentTimeDisplay)
+
+  currentTimeDisplay.updateContent = function() {
+    const currentTime = player.value.currentTime()
+
+    // currentTime이 0이고 lastNonZeroTime이 있으면 0초를 표시하지 않음
+    if (currentTime === 0 && lastNonZeroTime > 0) {
+      return // 0초 표시 막기
+    }
+
+    if (currentTime > 0) {
+      lastNonZeroTime = currentTime
+    }
+
+    originalUpdate()
+  }
+
   replayButtonDom.classList.add('v-btn', 'mdi', 'mdi-replay')
   replayButtonDom.style = 'font-size: 28px;'
 
