@@ -109,6 +109,7 @@ const elBody = document.querySelector('body') as HTMLBodyElement
 let isFullscreen
 
 const isPlayed = ref(false)
+const showNextButton = ref(false)
 
 const playbackRateLists = [0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0]
 
@@ -145,6 +146,11 @@ const itostr = (arg: number) => arg.toString().padStart(2, '0')
 const chapterTitle = computed(() =>
     `${itostr(props.courseInfo.chapterNumber)}. ${props.courseInfo.chapterTitle}`,
 )
+
+const isLastPage = computed(() => {
+  // 현재 페이지가 마지막 페이지(아웃트로)인 경우 2.png 표시
+  return props.currentPage === props.totalPages
+})
 
 // const handleDownloadAll = () => {
 //   window.open('../down/note_all.zip', '_self')
@@ -615,6 +621,7 @@ onMounted(() => {
 
   player.value.on('ended', () => {
     // player.value.controlBar.playToggle.hide()
+    showNextButton.value = true
   })
 
   const currentTimeDisplay = player.value.controlBar.getChild('currentTimeDisplay')
@@ -857,6 +864,14 @@ onBeforeUnmount(() => {
     </button>
   </div>
 
+  <button
+    v-if="showNextButton && currentPage <= totalPages && pageInfo[currentPage - 1].title !== '퀴즈' && pageInfo[currentPage - 1].title !== '평가하기'"
+    :class="['btn-next', 'animate__animated', 'animate__fadeIn', { 'btn-next-last': isLastPage }]"
+    @click="emit('handleNext')"
+  >
+    NEXT
+  </button>
+
   <v-container id="refScript" class="w-100 ma-0 pa-0 script-container">
     <v-row class="ma-0 area-question">
       <v-col id="script-area" :ref="refScriptArea" cols="1" class="pa-0 d-flex align-end animate__animated" :class="openScript ? 'animate__flipInX' : ''">
@@ -958,6 +973,23 @@ onBeforeUnmount(() => {
   text-indent: -9999em;
   &:hover {
     background: transparent url(@/assets/img/common/skipBtnOver.png) no-repeat 0 0;
+  }
+}
+
+.btn-next {
+  position: absolute;
+  bottom: calc(50% - 291px);
+  right: calc(50% - 560px);
+  background: transparent url(@/assets/img/common/1.png) no-repeat center center;
+  background-size: contain;
+  width: 100px;
+  height: 120px;
+  z-index: 10000;
+  text-indent: -9999em;
+  cursor: pointer;
+  border: none;
+  &.btn-next-last {
+    background-image: url(@/assets/img/common/2.png);
   }
 }
 #bookmark {

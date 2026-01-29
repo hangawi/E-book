@@ -27,6 +27,21 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  currentPage: {
+    type: Number,
+    required: false,
+    default: 1,
+  },
+  totalPages: {
+    type: Number,
+    required: false,
+    default: 10,
+  },
+  pageInfo: {
+    type: Object,
+    required: false,
+    default: () => ({}),
+  },
 })
 
 const emit = defineEmits(['handleNext'])
@@ -58,6 +73,11 @@ const itostr = (arg: number) => arg.toString().padStart(2, '0')
 const chapterTitle = computed(() =>
     `${itostr(props.courseInfo.chapterNumber)}. ${props.courseInfo.chapterTitle}`,
 )
+
+const isLastPage = computed(() => {
+  // 현재 페이지가 마지막 페이지(아웃트로)인 경우 2.png 표시
+  return props.currentPage === props.totalPages
+})
 
 const showCountdown = ref(false)
 const countdown = ref(3)
@@ -469,6 +489,9 @@ onMounted(() => {
       <div class="shape-container" :data-chapter="courseInfo.chapterNumber">
         <p>{{ chapterTitle }}</p>
       </div>
+      <div id="course-title">
+        {{ courseInfo.courseName }}
+      </div>
     </v-overlay>
     <v-overlay
       v-model="alert"
@@ -497,8 +520,11 @@ onMounted(() => {
       class="countdown-overlay"
       :transition="false"
     >
-      <div class="shape-container-countdown" :data-chapter="courseInfo.chapterNumber">
+      <div class="shape-container" :data-chapter="courseInfo.chapterNumber">
         <p>{{ chapterTitle }}</p>
+      </div>
+      <div id="course-title">
+        {{ courseInfo.courseName }}
       </div>
       <div class="countdown-wrap">
         <p class="countdown-title">
@@ -520,6 +546,12 @@ onMounted(() => {
       scrim="#000"
       class="align-center justify-center alert-overlay"
     >
+      <div v-if="showResult" class="shape-container-result" :data-chapter="courseInfo.chapterNumber">
+        <p>{{ chapterTitle }}</p>
+      </div>
+      <div v-if="showResult" id="course-title">
+        {{ courseInfo.courseName }}
+      </div>
       <v-card class="bg-transparent animate__animated animate__flipInX area-result">
         <v-row class="result-mark">
           <v-col>
@@ -560,6 +592,14 @@ onMounted(() => {
       </v-card>
     </v-overlay>
   </v-container>
+
+  <button
+    v-if="showResult"
+    :class="['btn-next', { 'btn-next-last': isLastPage }]"
+    @click="emit('handleNext')"
+  >
+    NEXT
+  </button>
 </template>
 
 <style lang="scss" scoped>
@@ -1052,6 +1092,79 @@ li.exam-lists.exam-lists-long {
   }
 }
 
+.btn-next-fixed {
+  position: absolute;
+  bottom: calc(50% - 360px);
+  right: calc(50% - 550px);
+  background: transparent url(@/assets/img/top/shape.png) no-repeat center center;
+  background-size: contain;
+  width: 100px;
+  height: 30px;
+  z-index: 1000000;
+  font-family: 'Paperlogy-5Medium', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #000000;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-next {
+  position: absolute;
+  bottom: calc(50% - 291px);
+  right: calc(50% - 560px);
+  background: transparent url(@/assets/img/common/1.png) no-repeat center center;
+  background-size: contain;
+  width: 100px;
+  height: 120px;
+  z-index: 9999999;
+  text-indent: -9999em;
+  cursor: pointer;
+  border: none;
+  &.btn-next-last {
+    background-image: url(@/assets/img/common/2.png);
+  }
+}
+
+.shape-container-result {
+  position: fixed;
+  top: calc(50% - 313px);
+  left: calc(50% - 429px);
+  background: transparent url(@/assets/img/top/shape.png) no-repeat center center;
+  background-size: contain;
+  width: 317px;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 10000000;
+  filter: brightness(1) !important;
+
+  p {
+    font-family: 'Paperlogy-5Medium', sans-serif;
+    font-size: 19px;
+    font-weight: 200;
+    letter-spacing: -1px;
+    margin-left: 10px;
+    margin-top: -2px;
+    word-break: keep-all;
+    color: #000000;
+    text-align: center;
+  }
+}
+
+.shape-container-result[data-chapter="11"],
+.shape-container-result[data-chapter="12"],
+.shape-container-result[data-chapter="13"],
+.shape-container-result[data-chapter="19"] {
+  background: transparent url(@/assets/img/top/Shapev2.png) no-repeat center center;
+  background-size: contain;
+  width: 380px;
+  left: calc(50% - 430px);
+  filter: brightness(1) !important;
+}
+
 .alert-overlay {
   z-index: 999999 !important;
 }
@@ -1088,7 +1201,7 @@ li.exam-lists.exam-lists-long {
 
 .always-visible-overlay .shape-container {
   position: absolute;
-  top: calc(50% - 314px);
+  top: calc(50% - 313px);
   left: calc(50% - 429px);
   background: transparent url(@/assets/img/top/shape.png) no-repeat center center;
   background-size: contain;
@@ -1099,13 +1212,42 @@ li.exam-lists.exam-lists-long {
   justify-content: center;
   pointer-events: none;
   z-index: 1000001;
+  filter: brightness(1) !important;
 
   p {
     font-family: 'Paperlogy-5Medium', sans-serif;
     font-size: 19px;
     font-weight: 200;
     letter-spacing: -1px;
-    margin-left: 7px;
+    margin-left: 10px;
+    margin-top: -2px;
+    word-break: keep-all;
+    color: #000000;
+    text-align: center;
+  }
+}
+
+.countdown-overlay .shape-container {
+  position: absolute;
+  top: calc(50% - 313px);
+  left: calc(50% - 429px);
+  background: transparent url(@/assets/img/top/shape.png) no-repeat center center;
+  background-size: contain;
+  width: 317px;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1000001;
+  filter: brightness(1) !important;
+
+  p {
+    font-family: 'Paperlogy-5Medium', sans-serif;
+    font-size: 19px;
+    font-weight: 200;
+    letter-spacing: -1px;
+    margin-left: 10px;
     margin-top: -2px;
     word-break: keep-all;
     color: #000000;
@@ -1121,6 +1263,57 @@ li.exam-lists.exam-lists-long {
   background-size: contain;
   width: 380px;
   left: calc(50% - 430px);
+  filter: brightness(1) !important;
+}
+
+.countdown-overlay .shape-container[data-chapter="11"],
+.countdown-overlay .shape-container[data-chapter="12"],
+.countdown-overlay .shape-container[data-chapter="13"],
+.countdown-overlay .shape-container[data-chapter="19"] {
+  background: transparent url(@/assets/img/top/Shapev2.png) no-repeat center center;
+  background-size: contain;
+  width: 380px;
+  left: calc(50% - 430px);
+  filter: brightness(1) !important;
+}
+
+.always-visible-overlay #course-title {
+  position: absolute;
+  top: calc(50% - 295px);
+  right: calc(50% - 689px);
+  background: transparent url(@/assets/img/top/contentsTitle.png) no-repeat center center;
+  width: 527px;
+  height: 39px;
+  background-size: contain !important;
+  text-indent: -9999em;
+  z-index: 1000002;
+  filter: brightness(1) !important;
+}
+
+.countdown-overlay #course-title {
+  position: absolute;
+  top: calc(50% - 295px);
+  right: calc(50% - 689px);
+  background: transparent url(@/assets/img/top/contentsTitle.png) no-repeat center center;
+  width: 527px;
+  height: 39px;
+  background-size: contain !important;
+  text-indent: -9999em;
+  z-index: 1000002;
+  filter: brightness(1) !important;
+}
+
+.alert-overlay #course-title {
+  position: absolute;
+  top: calc(50% - 295px);
+  right: calc(50% - 689px);
+  background: transparent url(@/assets/img/top/contentsTitle.png) no-repeat center center;
+  width: 527px;
+  height: 39px;
+  background-size: contain !important;
+  text-indent: -9999em;
+  z-index: 10000001;
+  filter: brightness(1) !important;
 }
 
 .countdown-overlay {
@@ -1134,48 +1327,6 @@ li.exam-lists.exam-lists-long {
 
 .countdown-overlay :deep(.v-overlay__content) {
   z-index: 999999 !important;
-}
-
-.countdown-overlay .shape-container-countdown {
-  position: absolute;
-  top: calc(50% - 313.5px);
-  left: calc(50% - 430px);
-  background: transparent url(@/assets/img/top/shape.png) no-repeat center center;
-  background-size: contain;
-  width: 319px;
-  height: 78px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  z-index: 1000000;
-
-  p {
-    font-family: 'Paperlogy-5Medium', sans-serif;
-    font-size: 19px;
-    font-weight: 200;
-    letter-spacing: -1px;
-    margin-left: 11px;
-    margin-top: -2px;
-    word-break: keep-all;
-    color: #000000;
-    text-align: center;
-  }
-}
-
-.countdown-overlay .shape-container-countdown[data-chapter="11"],
-.countdown-overlay .shape-container-countdown[data-chapter="12"],
-.countdown-overlay .shape-container-countdown[data-chapter="13"],
-.countdown-overlay .shape-container-countdown[data-chapter="19"] {
-  background: transparent url(@/assets/img/top/Shapev2.png) no-repeat center center;
-  background-size: contain;
-  width: 380px;
-  left: calc(50% - 430px);
-  top: calc(50% - 313.5px);
-
-  p {
-    margin-left: 11px;
-  }
 }
 
 .countdown-wrap {

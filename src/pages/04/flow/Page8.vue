@@ -119,6 +119,9 @@ onMounted(() => {
       v-if="isReady"
       :course-info="courseInfo"
       :question-lists="questionLists"
+      :current-page="props.currentPage"
+      :total-pages="props.totalPages"
+      :page-info="pageInfo"
       @handle-next="handleNext"
     />
   </div>
